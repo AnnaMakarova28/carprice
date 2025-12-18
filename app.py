@@ -20,7 +20,6 @@ class PrepData():
         self.df = df
         self.feature_cols = feature_cols
         pass
-  # maybe change csv_file path -> df in app
 
     def get_numeric(self, x):
         s = str(x).lower()
@@ -63,7 +62,6 @@ class PrepData():
         df = self.df.copy()
         df = df.loc[:, ~df.columns.str.match(r"(?i)^unnamed")]
 
-        # drop duplicates
         cols = df.copy().drop(['selling_price'], axis=1, errors='ignore').columns
         df = df.drop_duplicates(subset=cols, keep='first')
 
@@ -117,7 +115,7 @@ class PrepData():
         df_ohe = pd.get_dummies(df, columns=cols, drop_first=True)
         
         if self.feature_cols is None:
-            self.feature_cols = df_ohe.columns  # сохраняем по трейну
+            self.feature_cols = df_ohe.columns
         else:
             df_ohe = df_ohe.reindex(columns=self.feature_cols, fill_value=0)
 
@@ -189,4 +187,5 @@ if uploaded_file:
         mime="text/csv",
     )
 else:
+
     st.info("Download csv to get predictions")
