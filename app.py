@@ -16,12 +16,6 @@ st.set_page_config(
 )
 
 ######### df preprocessing ############
-import pandas as pd
-import numpy as np
-import random
-import re
-from datetime import datetime
-
 class PrepData():
 	def __init__(self, df, feature_cols=None):
 		self.df = df
