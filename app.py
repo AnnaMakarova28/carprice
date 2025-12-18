@@ -167,14 +167,11 @@ if uploaded_file:
     prep = PrepData(df_raw, feature_cols=feature_cols)
     df_ready = prep.process()
 
-    # st.subheader("raw data")
-    # st.dataframe(df_ready.head(20), use_container_width=True)
-
     X, _ = prep.x_y_data()
     X = X.reindex(columns=feature_cols, fill_value=0)
     X = X.drop(columns=['selling_price'], errors='ignore')
 
-    st.subheader("raw data")
+    st.subheader("processed data")
     st.dataframe(X.head(20), use_container_width=True)
 
     y_pred_log = model.predict(X)
